@@ -15,7 +15,7 @@
       ],
       "buildRoot": "${projectDir}\\out\\${name}",
       "installRoot": "${projectDir}\\install\\${name}",
-      "cmakeToolchain": "${env.AzureSphereDefaultSDKDir}CMakeFiles\\AzureSphereRTCoreToolchainEdge.cmake",
+      "cmakeToolchain": "${env.AzureSphereDefaultSDKDir}CMakeFiles\\AzureSphereRTCoreToolchainEdgeImpulse.cmake",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
       "variables": [
@@ -34,7 +34,7 @@
       ],
       "buildRoot": "${projectDir}\\out\\${name}",
       "installRoot": "${projectDir}\\install\\${name}",
-      "cmakeToolchain": "${env.AzureSphereDefaultSDKDir}CMakeFiles\\AzureSphereRTCoreToolchain.cmake",
+      "cmakeToolchain": "${env.AzureSphereDefaultSDKDir}CMakeFiles\\AzureSphereRTCoreToolchainEdgeImpulse.cmake",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
       "variables": [
