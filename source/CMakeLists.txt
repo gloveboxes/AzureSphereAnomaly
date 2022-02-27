@@ -32,7 +32,7 @@ add_definitions(-DEIDSP_USE_CMSIS_DSP=0
 add_compile_definitions(OSAI_FREERTOS)
 add_compile_definitions(OSAI_ENABLE_DMA)
 # When place CODE_REGION in FLASH instead of TCM, please enable this definition:
-add_compile_definitions(M4_ENABLE_XIP_FLASH)
+# add_compile_definitions(M4_ENABLE_XIP_FLASH)
 add_link_options(-specs=nano.specs -specs=nosys.specs)
 
 # Executable
@@ -95,6 +95,9 @@ target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sa
 target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sample_Code/OS_HAL/src/os_hal_uart.c)
 target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sample_Code/OS_HAL/src/os_hal_dma.c)
 target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sample_Code/OS_HAL/src/os_hal_i2c.c)
+
+target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sample_Code/OS_HAL/src/os_hal_mbox.c)
+target_sources(${PROJECT_NAME} PRIVATE ../mt3620_m4_software-master/MT3620_M4_Sample_Code/OS_HAL/src/os_hal_mbox_shared_mem.c)
 
 # Libraries
 set(OSAI_FREERTOS 1)

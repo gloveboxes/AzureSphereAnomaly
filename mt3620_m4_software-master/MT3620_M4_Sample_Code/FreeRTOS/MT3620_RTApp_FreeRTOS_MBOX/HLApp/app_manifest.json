@@ -5,7 +5,7 @@
   "EntryPoint": "/bin/app",
   "CmdArgs": [],
   "Capabilities": {
-    "AllowedApplicationConnections": [ "CC0C53C7-E4B8-4D30-884C-034D6434DAAA", "CC0C53C7-E4B8-4D30-884C-034D6434DBBB" ]
+    "AllowedApplicationConnections": [ "CC0C53C7-E4B8-4D30-884C-034D6434DAAA" ]
   },
   "ApplicationType": "Default"
 }

@@ -53,7 +53,6 @@ static EventRegistration *socketEventReg = NULL;
 static volatile sig_atomic_t exitCode = ExitCode_Success;
 
 static const char rtAppComponentId[] = "CC0C53C7-E4B8-4D30-884C-034D6434DAAA";
-static const char rtAppComponentId_B[] = "CC0C53C7-E4B8-4D30-884C-034D6434DBBB";
 
 static void TerminationHandler(int signalNumber);
 static void SendTimerEventHandler(EventLoopTimer *timer);
@@ -103,14 +102,6 @@ static void SendMessageToRTApp(void)
         return;
     }
 
-    snprintf(txMessage, sizeof(txMessage), "Hello-World-b%d", iter++);
-    Log_Debug("Sending to CM4_B: %s\n", txMessage);
-    bytesSent = send(sockFd_B, txMessage, strlen(txMessage), 0);
-    if (bytesSent == -1) {
-        Log_Debug("ERROR: Unable to send message: %d (%s)\n", errno, strerror(errno));
-        exitCode = ExitCode_SendMsg_Send;
-        return;
-    }
 }
 
 /// <summary>
@@ -171,21 +162,11 @@ static ExitCode InitHandlers(void)
         return ExitCode_Init_Connection;
     }
 
-    sockFd_B = Application_Connect(rtAppComponentId_B);
-    if (sockFd_B == -1) {
-        Log_Debug("ERROR: Unable to create socket: %d (%s)\n", errno, strerror(errno));
-        return ExitCode_Init_Connection;
-    }
+
 
     // Set timeout, to handle case where real-time capable application does not respond.
     static const struct timeval recvTimeout = {.tv_sec = 5, .tv_usec = 0};
     int result = setsockopt(sockFd, SOL_SOCKET, SO_RCVTIMEO, &recvTimeout, sizeof(recvTimeout));
-    if (result == -1) {
-        Log_Debug("ERROR: Unable to set socket timeout: %d (%s)\n", errno, strerror(errno));
-        return ExitCode_Init_SetSockOpt;
-    }
-
-    result = setsockopt(sockFd_B, SOL_SOCKET, SO_RCVTIMEO, &recvTimeout, sizeof(recvTimeout));
     if (result == -1) {
         Log_Debug("ERROR: Unable to set socket timeout: %d (%s)\n", errno, strerror(errno));
         return ExitCode_Init_SetSockOpt;
@@ -198,14 +179,6 @@ static ExitCode InitHandlers(void)
         Log_Debug("ERROR: Unable to register socket event: %d (%s)\n", errno, strerror(errno));
         return ExitCode_Init_RegisterIo;
     }
-
-    socketEventReg = EventLoop_RegisterIo(eventLoop, sockFd_B, EventLoop_Input, SocketEventHandler,
-                                          /* context */ NULL);
-    if (socketEventReg == NULL) {
-        Log_Debug("ERROR: Unable to register socket event: %d (%s)\n", errno, strerror(errno));
-        return ExitCode_Init_RegisterIo;
-    }
-
 
     return ExitCode_Success;
 }

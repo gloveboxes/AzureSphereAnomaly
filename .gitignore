@@ -10,3 +10,12 @@ build/approot*
 build/build.ninja
 build/cmake_install.cmake
 build/lib
+
+
+
+# Ignore output directories
+/out/
+/install/
+/.vs/
+/v16/
+/build/
