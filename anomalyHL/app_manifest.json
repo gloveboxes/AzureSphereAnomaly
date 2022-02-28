@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": 1,
+  "Name": "hvac_solution",
+  "ComponentId": "25025d2c-66da-4448-bae1-ac26fcdd3627",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [
+    "--ScopeID",
+    "0ne0040E641"
+  ],
+  "Capabilities": {
+    "Gpio": [
+      "$NETWORK_CONNECTED_LED",
+      "$LED2"
+    ],
+    "PowerControls": [
+      "ForceReboot"
+    ],
+    "SystemEventNotifications": true,
+    "SoftwareUpdateDeferral": true,
+    "AllowedConnections": [
+      "global.azure-devices-provisioning.net",
+      "iotc-8edf2c45-6c1d-43c5-b414-697102bb292b.azure-devices.net",
+      "iotc-2905bde0-4dc2-420b-adb2-4af34896ffb8.azure-devices.net",
+      "iotc-83c7f965-1f2d-43ce-bdca-755df6fabe7f.azure-devices.net",
+      "iotc-1c97cb0c-69f3-4c00-a069-9b18be0df266.azure-devices.net",
+      "iotc-d1928fd1-b40c-4a20-b3ad-7aace374eb9e.azure-devices.net",
+      "iotc-24cf5a60-4a9b-433f-9382-906d8e2c9b24.azure-devices.net",
+      "iotc-6d6c1ffd-d9e8-488e-af3b-105ae6042d17.azure-devices.net",
+      "iotc-ce25c803-85e8-4ea0-98b6-cba041027740.azure-devices.net",
+      "iotc-489fe390-75a1-4368-ac28-32609b0617ca.azure-devices.net",
+      "iotc-a0066a29-b619-4042-ac78-2afb876f5b02.azure-devices.net"
+    ],
+    "DeviceAuthentication": "9d7e79eb-e021-43ce-9f2b-fa944b447494",
+    "AllowedApplicationConnections": [
+      "6583cf17-d321-4d72-8283-0b7c5b56442b"
+    ]
+  },
+  "ApplicationType": "Default"
+}
