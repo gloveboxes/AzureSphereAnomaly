@@ -384,15 +384,14 @@ static void send_intercore_msg(INTERCORE_BLOCK *data, size_t length)
 
 void update_intercore(const char *prediction)
 {
-    static char previous_prediction[20] = {0};
+    static char previous_prediction[64] = {0};
 
-    if (strncmp(prediction, previous_prediction, sizeof(previous_prediction)) != 0 &&
-        strcmp(prediction, "uncertain") != 0)
+    if (strcmp(prediction, "uncertain") != 0)
     {
-        strncpy(previous_prediction, prediction, sizeof(previous_prediction));
+        strcpy(previous_prediction, prediction);
         // memset(&intercore_block, 0x00, sizeof(INTERCORE_BLOCK));
         intercore_block.cmd = IC_PREDICTION;
-        strncpy(intercore_block.PREDICTION, prediction, sizeof(intercore_block.PREDICTION));
+        strcpy(intercore_block.PREDICTION, prediction);
 
         send_intercore_msg(&intercore_block, sizeof(intercore_block));
     }
@@ -413,9 +412,11 @@ void inference_task(void *pParameters)
 
     // wait until we have a full frame of data
     vTaskDelay(pdMS_TO_TICKS((EI_CLASSIFIER_INTERVAL_MS * EI_CLASSIFIER_RAW_SAMPLE_COUNT)));
+    mtk_os_hal_gpio_set_output(gpio_led_green, OS_HAL_GPIO_DATA_LOW);
 
     while (1)
     {
+        
         // copy into working buffer (other buffer is used by other task)
         memcpy(inference_buffer, buffer, EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE * sizeof(float));
 
@@ -483,6 +484,8 @@ void i2c_task(void *pParameters)
     // Create inference task
     xTaskCreate(inference_task, "Inferencing Task", APP_STACK_SIZE_BYTES * 4, NULL, 2, NULL);
 
+    mtk_os_hal_gpio_set_output(gpio_led_red, OS_HAL_GPIO_DATA_LOW);
+
     while (1)
     {
         // roll the buffer -3 points so we can overwrite the last one
@@ -509,7 +512,7 @@ extern "C" _Noreturn void RTCoreMain(void)
     mtk_os_hal_gpio_set_direction(gpio_led_red, OS_HAL_GPIO_DIR_OUTPUT);
     mtk_os_hal_gpio_set_direction(gpio_led_green, OS_HAL_GPIO_DIR_OUTPUT);
 
-    mtk_os_hal_gpio_set_output(gpio_led_red, OS_HAL_GPIO_DATA_LOW);
+    mtk_os_hal_gpio_set_output(gpio_led_red, OS_HAL_GPIO_DATA_HIGH);
     mtk_os_hal_gpio_set_output(gpio_led_green, OS_HAL_GPIO_DATA_HIGH);
 
     printf("\nFreeRTOS I2C LSM6DSO Demo %d\n", 1337);
