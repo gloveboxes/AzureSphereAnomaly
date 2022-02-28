@@ -481,7 +481,7 @@ void i2c_task(void *pParameters)
         return;
 
     // Create inference task
-    xTaskCreate(inference_task, "Inferencing Task", APP_STACK_SIZE_BYTES * 2, NULL, 2, NULL);
+    xTaskCreate(inference_task, "Inferencing Task", APP_STACK_SIZE_BYTES * 4, NULL, 2, NULL);
 
     while (1)
     {

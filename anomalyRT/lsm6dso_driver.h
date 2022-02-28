@@ -40,7 +40,6 @@
 extern "C" {
 #endif
 
-float lp_get_temperature(void);
 void lsm6dso_read(float *x, float *y, float *z);
 void lsm6dso_show_result(void);
 int lsm6dso_init(void *i2c_write, void *i2c_read);

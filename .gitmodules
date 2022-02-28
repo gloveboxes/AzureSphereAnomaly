@@ -1,0 +1,3 @@
+[submodule "anomalyHL/AzureSphereDevX"]
+	path = anomalyHL/AzureSphereDevX
+	url = https://github.com/Azure-Sphere-DevX/AzureSphereDevX.git

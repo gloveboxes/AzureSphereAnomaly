@@ -58,25 +58,6 @@ static float lsm6dsoTemperature_degC;
 /* Functions */
 /******************************************************************************/
 
-float lp_get_temperature(void)
-{
-	uint8_t reg;
-	axis1bit16_t data_raw_temperature;
-
-	lsm6dso_temp_flag_data_ready_get(&dev_ctx, &reg);
-	if (reg)
-	{
-		/* Read temperature data */
-		memset(data_raw_temperature.u8bit, 0x00, sizeof(int16_t));
-		lsm6dso_temperature_raw_get(&dev_ctx, data_raw_temperature.u8bit);
-		return lsm6dso_from_lsb_to_celsius(data_raw_temperature.i16bit);
-	}
-
-	return NAN;
-}
-
-
-
 void lsm6dso_read(float *x, float *y, float *z) {
 	uint8_t reg;
 
